@@ -119,9 +119,24 @@ class ProjectController extends Controller
         ]);
 
         $formData = $request->all();
+
+        // per aggiungere immagini alla colonna cover_image
+        if($request->hasFile('cover_image')) {
+            // Se c'è l'immagine vecchia la cancello dalla cartella
+            if($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+
+            // Fare l'upload del file nella cartella pubblica
+            $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+            // Salvare nel db il path del file caricato nella colonna cover_image
+            $formData['cover_image'] = $img_path;
+        }
+
         $formData['slug'] = Str::slug($formData['name'], '-');
         //dd($formData);
         $project->update($formData);
+
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);  
     }

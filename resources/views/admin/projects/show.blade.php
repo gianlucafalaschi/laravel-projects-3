@@ -29,9 +29,8 @@
     
     @if ($project->cover_image)
         <div>
-            <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->name }}">
-        </div>
-        
+            <img class="img-fluid" src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->name }}">
+        </div>  
     @endif
     
     <div class="mt-4">
