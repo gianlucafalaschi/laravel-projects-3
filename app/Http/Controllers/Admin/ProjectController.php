@@ -8,7 +8,7 @@ use App\Models\Project;
 use Illuminate\Support\Str; // importo classe Str per ricavare slug
 use Illuminate\Validation\Rule; // importo class Rule per usare ignore nella validation dell'update
 use Illuminate\Support\Facades\Storage; // importo storage per usare storage per le immagini
-
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -80,8 +80,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {
-        //dd($project);
+    {   
+        
         return view('admin.projects.show', compact('project'));
     }
 
