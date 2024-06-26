@@ -48,6 +48,7 @@ class ProjectController extends Controller
             'name' => 'required|min:5|max:250|unique:projects,name|',
             'client_name' => 'nullable|min:5',
             'summary' => 'nullable|min:10', 
+            'cover_image' => 'nullable|image|max:256'
         ]);
 
 
@@ -116,6 +117,7 @@ class ProjectController extends Controller
             ],
             'client_name' => 'nullable|min:5',
             'summary' => 'nullable|min:10', 
+            'cover_image' => 'nullable|image|max:256'
         ]);
 
         $formData = $request->all();
