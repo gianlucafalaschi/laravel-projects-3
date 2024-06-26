@@ -9,6 +9,10 @@
     <div>
         <strong>Slug</strong>: {{ $project->slug }}
     </div>
+    {{-- type è il nome della funzione nel model Project --}}
+    <div>   
+        <strong>Type</strong>: {{ $project->type ? $project->type->name : 'none' }}  
+    </div>
     
     <div>
         {{-- se client_name c'è allora stampa client_name, altrimenti stampa 'empty' --}}
