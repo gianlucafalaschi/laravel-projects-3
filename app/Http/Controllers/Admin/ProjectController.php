@@ -31,8 +31,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.projects.create');
+    {    
+        //passare informazioni dal model della tabella types   
+        $types = Type::all();
+        //dd($types);
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -48,11 +51,16 @@ class ProjectController extends Controller
             'name' => 'required|min:5|max:250|unique:projects,name|',
             'client_name' => 'nullable|min:5',
             'summary' => 'nullable|min:10', 
-            'cover_image' => 'nullable|image|max:256'
+            'cover_image' => 'nullable|image|max:256',
+            // valore della select nel form create. Per essere validato o non è inserito o se 
+            //inserito ha uno dei valori esistenti nella colonna id della tabella types
+            'type_id' => 'nullable|exists:types,id'   
         ]);
 
 
         $formData = $request->all();
+        //dd($formData);
+
         // per aggiungere immagini alla colonna cover_image
         if($request->hasFile('cover_image')) {
             // fare l'upload del file immagine nella cartella pubblica
