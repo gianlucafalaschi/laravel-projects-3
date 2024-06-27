@@ -101,8 +101,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {   
+        //passare informazioni dal model della tabella types   
+        $types = Type::all();
         //dd($project);
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -125,7 +127,10 @@ class ProjectController extends Controller
             ],
             'client_name' => 'nullable|min:5',
             'summary' => 'nullable|min:10', 
-            'cover_image' => 'nullable|image|max:256'
+            'cover_image' => 'nullable|image|max:256',
+            // valore della select nel form create. Per essere validato o non è inserito o se 
+            //inserito ha uno dei valori esistenti nella colonna id della tabella types
+            'type_id' => 'nullable|exists:types,id' 
         ]);
 
         $formData = $request->all();
